@@ -10,8 +10,8 @@ namespace PassIn.Api.Controllers;
 public class EventController : ControllerBase
 {
     [HttpPost]
-    [ProducesErrorResponseType(typeof(ResponseRegisteredEventJson), StatusCodes.Status201Created)]
-    [ProducesErrorResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseRegisteredEventJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public IActionResult Register([FromBody] RequestEventJson request)
     {
         try
