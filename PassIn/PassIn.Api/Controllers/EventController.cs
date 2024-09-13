@@ -27,10 +27,6 @@ public class EventController : ControllerBase
         {
             return BadRequest(new ResponseErrorJson(ex.Message));
         }
-        catch
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorJson("Unknow error."));
-        }
     }
 
     [HttpGet]
@@ -49,10 +45,6 @@ public class EventController : ControllerBase
         catch (PassInException ex)
         {
             return NotFound(new ResponseErrorJson(ex.Message));
-        }
-        catch
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorJson("Unknow error."));
         }
     }
 }
