@@ -32,4 +32,11 @@ public class EventController : ControllerBase
 
         return Ok(response);
     }
+
+    [HttpPost]
+    [Route("{eventId}/register")]
+    public IActionResult Register([FromRoute] Guid eventId, [FromBody] RequestRegisterEventJson request)
+    {
+        return Created();
+    }
 }
