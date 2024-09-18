@@ -1,5 +1,6 @@
 using System.Net.Mail;
 using PassIn.Communication.Requests;
+using PassIn.Communication.Responses;
 using PassIn.Exceptions;
 using PassIn.Infrastructure;
 
@@ -14,7 +15,7 @@ public class RegisterAttendeeOnEventUseCase
         _dbContext = new PassInDbContext();
     }
     
-    public void Execute(Guid eventId, RequestRegisterEventJson request)
+    public ResponseRegisterJson Execute(Guid eventId, RequestRegisterEventJson request)
     {
         Validate(eventId, request);
 
@@ -28,6 +29,11 @@ public class RegisterAttendeeOnEventUseCase
 
         _dbContext.Attendees.Add(entity);
         _dbContext.SaveChanges();
+
+        return new ResponseRegisterJson()
+        {
+            Id = entity.Id
+        };
     }
 
     private void Validate(Guid eventId, RequestRegisterEventJson request)
