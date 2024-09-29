@@ -17,6 +17,7 @@ public class GetAllAttendeeByEventIdUseCase
         var entity = _dbContext
             .Events
             .Include(ev => ev.Attendees)
+            .ThenInclude(attendee => attendee.CheckIn)
             .FirstOrDefault(ev => ev.Id == eventId);
         if(entity is null)
             throw new NotFoundException("An event with this id does not exist");
@@ -29,6 +30,7 @@ public class GetAllAttendeeByEventIdUseCase
                 Name = attendee.Name,
                 Email = attendee.Email,
                 CreatedAt = attendee.Create_At,
+                CheckedInAt = attendee.CheckIn?.Created_at
             }).ToList()
         };
     }
